@@ -1,5 +1,5 @@
 package calculator;
-
+import static org.hamcrest.Matchers.*;
 import  ch.lambdaj.function.convert.Converter;
 import static ch.lambdaj.Lambda.*;
 import java.util.List;
@@ -18,7 +18,11 @@ public class Calculator {
 		else {
 			String [] tokens=tokenize(text);
 			List<Integer> numbers = convert(tokens,toInt());
+			List<Integer> negatives = filter(lessThan(0), numbers);
 			
+			if(negatives.size()>0) {
+				throw new RuntimeException("Negatives not allowed: " + join(negatives));
+			}
 			return sum(numbers).intValue();
 		}
 		
