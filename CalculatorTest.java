@@ -32,4 +32,10 @@ public class CalculatorTest {
 				
 	}
 	
+	@Test
+	public void shouldAcceptCustomDelimiterSyntax() {
+		assertEquals(3,Calculator.add("//;\n1;2"));
+				
+	}
+	
 }
