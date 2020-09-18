@@ -57,10 +57,10 @@ public class CalculatorTest {
 	public void exceptionMessageShouldContainTheNegativeNumber() {
 		try 
 		{
-			Calculator.add("-1,2,3");
+			Calculator.add("-1,-2,3");
 			fail("Exception expected.");
 		}catch (RuntimeException ex) {
-			assertEquals("Negatives not allowed: -1", ex.getMessage());
+			assertEquals("Negatives not allowed: -1, -2", ex.getMessage());
 		}
 	}
 	
