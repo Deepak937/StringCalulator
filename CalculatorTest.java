@@ -26,5 +26,10 @@ public class CalculatorTest {
 				
 	}
 	
+	@Test
+	public void shouldAcceptNewlineAsValidDelimiter() {
+		assertEquals(6,Calculator.add("1\n2,3"));
+				
+	}
 	
 }
