@@ -9,5 +9,9 @@ public class CalculatorTest {
 	public void shouldReturnZeroOnEmptyString() {
 		assertEquals(0,Calculator.add(""));
 	}
-
+	
+	@Test
+	public void shouldReturnNumberOnNumber() {
+		assertEquals(1,Calculator.add("1"));
+	}
 }
