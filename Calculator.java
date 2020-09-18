@@ -3,6 +3,8 @@ package calculator;
 import  ch.lambdaj.function.convert.Converter;
 import static ch.lambdaj.Lambda.*;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Calculator {
 
@@ -23,6 +25,15 @@ public class Calculator {
 	}
 	
 	private static String []  tokenize(String text) {
+		if(text.startsWith("//")) {
+			Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+			m.matches();
+			String customDelimiter=m.group(1);
+			String numbers=m.group(2);
+			
+			return numbers.split(customDelimiter);
+		}
+		
 		String [] tokens =text.split(",|\n");
 		return tokens;
 	}
