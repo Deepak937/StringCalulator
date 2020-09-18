@@ -38,4 +38,9 @@ public class CalculatorTest {
 				
 	}
 	
+	@Test
+	public void customDelimeterCouldBeAlsoARegExpSpecialChar() {
+		assertEquals(3,Calculator.add("//.\n1.2"));
+				
+	}
 }
