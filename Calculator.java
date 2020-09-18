@@ -11,33 +11,43 @@ public class Calculator {
 	
 	public static int add(String text)
 	{
-		if(text.isEmpty())
-		{
-			return 0;
-		}
-		else {
-			String [] tokens=tokenize(text);
-			List<Integer> numbers = convert(tokens,toInt());
-			List<Integer> negatives = filter(lessThan(0), numbers);
+			List<Integer> numbers = parseNumbers(text);
 			
-			if(negatives.size()>0) {
-				throw new RuntimeException("Negatives not allowed: " + join(negatives));
-			}
+			ensureAllNonNegative(numbers);
 			return sum(numbers).intValue();
-		}
+		
 		
 	}
 	
 	
-	
-	
 	private static String []  tokenize(String text) {
-		if(usesCustomDelimiterSyntax(text)) {
+		
+		if(text.isEmpty()) {
+			return new String[0];
+		}
+		else if(usesCustomDelimiterSyntax(text)) {
 			return splitUsingCustomDelimiterSyntax( text);
 		}
 		else
 		{
 			return splitUsingNewlinesAndCommas( text);
+		}
+	}
+	
+	
+	private static List<Integer> parseNumbers(String text) {
+		String [] tokens=tokenize(text);
+		List<Integer> numbers = convert(tokens,toInt());
+		return numbers;
+	}
+	
+	
+	
+	private static void ensureAllNonNegative(List<Integer> numbers) throws NumberFormatException{
+		List<Integer> negatives = filter(lessThan(0), numbers);
+		
+		if(negatives.size()>0) {
+			throw new RuntimeException("Negatives not allowed: " + join(negatives));
 		}
 	}
 	
