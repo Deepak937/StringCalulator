@@ -24,18 +24,34 @@ public class Calculator {
 		
 	}
 	
+	
+	
+	
 	private static String []  tokenize(String text) {
-		if(text.startsWith("//")) {
-			Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
-			m.matches();
-			String customDelimiter=m.group(1);
-			String numbers=m.group(2);
-			
-			return numbers.split(customDelimiter);
+		if(usesCustomDelimiterSyntax(text)) {
+			return splitUsingCustomDelimiterSyntax( text);
 		}
-		
+		else
+		{
+			return splitUsingNewlinesAndCommas( text);
+		}
+	}
+	
+	private static boolean usesCustomDelimiterSyntax(String text) {
+		return text.startsWith("//");
+	}
+	
+	private static String[] splitUsingNewlinesAndCommas(String text) {
 		String [] tokens =text.split(",|\n");
 		return tokens;
+	}
+	private static String [] splitUsingCustomDelimiterSyntax(String text) {
+		Matcher m = Pattern.compile("//(.)\n(.*)").matcher(text);
+		m.matches();
+		String customDelimiter=m.group(1);
+		String numbers=m.group(2);
+		
+		return numbers.split(Pattern.quote(customDelimiter));
 	}
 	
 	private static Converter<String, Integer> toInt(){
