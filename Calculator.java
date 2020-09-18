@@ -23,7 +23,7 @@ public class Calculator {
 	}
 	
 	private static String []  tokenize(String text) {
-		String [] tokens =text.split(",");
+		String [] tokens =text.split(",|\n");
 		return tokens;
 	}
 	
