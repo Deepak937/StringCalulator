@@ -1,7 +1,13 @@
 package calculator;
 
-public class Calculator{
-  public static int add (String text){
-    return -1; 
-  }
+import org.junit.*;
+import static org.junit.Assert.*;
+
+public class CalculatorTest {
+
+	@Test
+	public void shouldReturnZeroOnEmptyString() {
+		assertEquals(0,Calculator.add(""));
+	}
+
 }
